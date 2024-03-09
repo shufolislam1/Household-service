@@ -2,7 +2,7 @@
 <form style="width: 50%; margin: auto" method="post">
   <h1>{{type}} page</h1>
   {% csrf_token %} {{form | crispy }}
-  <div class="form-check">
+  {% comment %} <div class="form-check">
     <input
       class="form-check-input"
       type="checkbox"
@@ -23,7 +23,7 @@
     <label class="form-check-label" for="flexCheckDefault">
       Client {{ form.is_client }}
     </label>
-  </div>
+  </div> {% endcomment %}
   <button class="btn btn-warning mb-5">Submit</button>
 </form>
 {% endblock content %}

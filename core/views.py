@@ -18,7 +18,7 @@ def register(request):
 
     else:
         register_form = forms.RegistrationForm()
-    return render(request, 'register.html', {'form':register_form, 'type':'register'})
+    return render(request, 'login_register.html', {'form':register_form, 'type':'Register'})
 
 def userLogin(request):
     if request.method == 'POST':
@@ -41,7 +41,7 @@ def userLogin(request):
             
     else:
         form = AuthenticationForm()
-    return render(request,'register.html', {'form': form, 'type':'login'})
+    return render(request,'login_register.html', {'form': form, 'type':'Login'})
     
 def userLogout(request):
     logout(request)

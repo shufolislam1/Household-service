@@ -16,6 +16,8 @@ class RegistrationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         
         for field in self.fields:
+            self.fields['is_admin'].widget.attrs['class'] = 'form-check-input'
+            self.fields['is_client'].widget.attrs['class'] = 'form-check-input'
             self.fields[field].widget.attrs.update({
                 
                 'class' : (
