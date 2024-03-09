@@ -77,3 +77,23 @@ def edit_profile(request):
 def home(request):
     return render(request, 'home.html')
 
+
+@login_required
+def user_list(request):
+    if request.user.is_admin:
+        users = User.objects.filter(is_admin=False)
+        return render(request, 'user_list.html', {'users': users})
+    else:
+        # Redirect or display an error message for non-admin users
+        return render(request, 'error.html', {'message': 'Permission Denied'})
+
+@login_required
+def promote_to_admin(request):
+    if request.method == 'POST':
+        user_ids = request.POST.getlist('user_ids')
+        users_to_promote = User.objects.filter(id__in=user_ids)
+        for user in users_to_promote:
+            user.is_admin = True
+            user.save()
+        # Add success message if needed
+    return redirect('user_list')
