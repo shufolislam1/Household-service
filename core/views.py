@@ -26,10 +26,14 @@ def userLogin(request):
         if form.is_valid():
             user_name = form.cleaned_data['username']
             user_pass = form.cleaned_data['password']
-            user_authenticate = authenticate(username=user_name, password = user_pass)
-            if user_authenticate is not None:
-                messages.success(request,'login successful')
-                login(request, user_authenticate)
+            user = authenticate(username=user_name, password = user_pass)
+            if user is not None and user.is_admin:
+                messages.success(request,'login successful as admin')
+                login(request, user)
+                return redirect('home')
+            elif user is not None and user.is_client:
+                messages.success(request,'login successful as client')
+                login(request, user)
                 return redirect('home')
             else:
                 messages.warning(request, 'login info incorrect')

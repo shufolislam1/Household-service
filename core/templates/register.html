@@ -1,10 +1,29 @@
-{% extends "base.html" %}
-{%  load crispy_forms_tags %}
-{% block content %}
-<form style="width:50% ; margin : auto" method="post">
-    <h1>{{type}} page</h1>
-    {% csrf_token %}
-    {{form | crispy }}
-<button class="btn btn-warning mb-5">Submit</button>
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<form style="width: 50%; margin: auto" method="post">
+  <h1>{{type}} page</h1>
+  {% csrf_token %} {{form | crispy }}
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      value=""
+      id="flexCheckDefault"
+    />
+    <label class="form-check-label" for="flexCheckDefault">
+      Admin {{ form.is_admin }}
+    </label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      value=""
+      id="flexCheckDefault"
+    />
+    <label class="form-check-label" for="flexCheckDefault">
+      Client {{ form.is_client }}
+    </label>
+  </div>
+  <button class="btn btn-warning mb-5">Submit</button>
 </form>
 {% endblock content %}
