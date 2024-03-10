@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from .models import User
 
 # Create your views here.
 def register(request):
@@ -48,9 +48,13 @@ def userLogout(request):
     messages.success(request,'logout successful')
     return redirect('userLogin')
 
-
 @login_required
 def profile(request):
+    if request.user.is_admin:
+        users = User.objects.filter(is_admin=False)
+        print(users)
+        print('hi')
+        return render(request, 'profile.html', {'users': users})
     user_data = {
         'username': request.user.username,
         'first_name': request.user.first_name,
@@ -73,19 +77,8 @@ def edit_profile(request):
         profile_form = forms.ChangeUserForm(instance = request.user)
     return render(request, 'update_profile.html', {'form' : profile_form})
 
-
 def home(request):
     return render(request, 'home.html')
-
-
-@login_required
-def user_list(request):
-    if request.user.is_admin:
-        users = User.objects.filter(is_admin=False)
-        return render(request, 'user_list.html', {'users': users})
-    else:
-        # Redirect or display an error message for non-admin users
-        return render(request, 'error.html', {'message': 'Permission Denied'})
 
 @login_required
 def promote_to_admin(request):
@@ -96,4 +89,6 @@ def promote_to_admin(request):
             user.is_admin = True
             user.save()
         # Add success message if needed
-    return redirect('user_list')
+        messages.success(request, 'Promoted to admin Successfully')
+    return redirect('profile')
+
