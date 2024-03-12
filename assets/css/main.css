@@ -1523,7 +1523,6 @@ input, select, textarea {
 		-webkit-transition: all .25s ease-in-out;
 		-ms-transition: all .25s ease-in-out;
 		transition: all .25s ease-in-out;
-		-webkit-appearance: none;
 		display: block;
 		border: 0;
 		background: #eee;
@@ -2061,7 +2060,7 @@ input, select, textarea {
 		justify-content: center;
 		position: relative;
 		height: 24em;
-		background: url("../images/banner.jpg") center center;
+		background: url("../../images/banner.jpg") center center;
 		background-size: cover;
 		padding: 0;
 	}
