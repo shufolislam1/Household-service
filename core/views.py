@@ -77,9 +77,6 @@ def edit_profile(request):
         profile_form = forms.ChangeUserForm(instance = request.user)
     return render(request, 'update_profile.html', {'form' : profile_form})
 
-def home(request):
-    return render(request, 'home.html')
-
 @login_required
 def promote_to_admin(request):
     if request.method == 'POST':

@@ -10,6 +10,9 @@ class Services(models.Model):
     def __str__(self):
         return self.service_name
     
+    class Meta:
+        verbose_name_plural = "Services"
+    
 class Order(models.Model):
     service = models.ForeignKey(Services, on_delete=models.CASCADE)
     order_date = models.DateTimeField(auto_now_add = True)

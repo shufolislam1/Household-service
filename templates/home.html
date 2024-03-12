@@ -1,4 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>hello</h2>
+<h4>Total {{ services | length }} services found</h4>
+<div class='d-flex row my-3'>
+    {% for service in services %}
+        <div class='card col-2 m-3'  style="width: 38rem;">
+            <img src="{{ service.image.url }}" alt="{{ service.name }}"> 
+            <h3>Name: {{ service.service_name }}</h3>
+            <p>Borrowing Price: ${{ service.price }}</p>
+            <p>Description: {{service.description}}</p>
+            <button type="button" class="btn btn-warning"><a href="" style="text-decoration: none;">Take Service</a></button> <br>
+            <button type="button" class="btn btn-warning my-2"><a href="{% url 'add_to_cart' service.id %}" style="text-decoration: none;">Add to Cart</a></button>
+        </div>
+    {% endfor %}
+</div>
 {% endblock content %}
