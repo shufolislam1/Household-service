@@ -51,25 +51,36 @@ def userLogout(request):
 @login_required
 def profile(request):
     if request.user.is_admin:
+        user = request.user
         users = User.objects.filter(is_admin=False)
-        print(users)
-        print('hi')
-        return render(request, 'profile.html', {'users': users})
+        user_data = {
+        'username': request.user.username,
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name,
+        'email': request.user.email,
+    }
+        return render(request, 'profile.html', {'users': users, 'user_data': user_data})
     user_data = {
         'username': request.user.username,
         'first_name': request.user.first_name,
         'last_name': request.user.last_name,
         'email': request.user.email,
     }
-    
-    return render(request, 'profile.html', {'user_data': user_data})
+    return render(request, 'profile.html', {'user_data': user_data, 'user':user})
 
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        profile_form = forms.ChangeUserForm(request.POST, instance = request.user)
+        
+        profile_form = forms.ChangeUserForm(request.POST, request.FILES, instance=request.user)
         if profile_form.is_valid():
-            profile_form.save()
+            user = profile_form.save(commit=False)
+            # If a new profile picture is uploaded, save it
+            profile_picture = request.FILES.get('profile_picture')
+            print(profile_picture)
+            if profile_picture:
+                user.profile_picture = profile_picture
+            user.save()
             messages.success(request, 'Profile Updated Successfully')
             return redirect('profile')
     

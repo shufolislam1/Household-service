@@ -24,12 +24,17 @@
             <div class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   {% if request.user.is_authenticated %}
+                  {% if request.user.is_client %}
                   <li class="nav-item">
                     <a class="nav-link btn btn-warning text-dark" href={% url "show_cart" %}>
                       Cart
                     </a>
                   </li>
+                  {% endif %}
                   <div class="nav-link btn btn-warning text-dark disabled">Welcome, {{ request.user.first_name }}</div>
+                  {% comment %} {% if user.profile_picture %}
+                  <img style="width:5%;" class="bg-info rounded-circle" src="{{ user.profile_picture.url }}" alt="">
+                  {% endif %} {% endcomment %}
                   <li class="nav-item">
                     <a class="nav-link btn btn-warning text-dark" href='{% url "profile" %}'>
                       {% if request.user.is_admin %} Admin {% endif %}

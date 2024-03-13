@@ -6,4 +6,5 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     is_admin = models.BooleanField('Is admin', default = False)
     is_client = models.BooleanField('Is Client', default=False)
+    profile_picture = models.ImageField(upload_to='uploads/', default=1)
     

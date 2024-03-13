@@ -1,7 +1,8 @@
 from django.urls import path
 from services.views import all_service
 from . import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('register/', views.register, name="register"),
@@ -12,3 +13,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('promote_to_admin/', views.promote_to_admin, name='promote_to_admin'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
