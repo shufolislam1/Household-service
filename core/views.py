@@ -114,5 +114,5 @@ def take_service(request, service_id):
         print(purchases)
         return render(request, 'profile.html', {'purchases': purchases})
     else:
-        messages.error(request, 'You need to be logged in to purchase a service.')
+        messages.warning(request, 'You need to be logged in to purchase a service.')
         return redirect('userLogin')
