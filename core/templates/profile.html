@@ -44,6 +44,13 @@
 {% endif %}
 
 {% if request.user.is_client %}
+<ul>
+  {% for purchase in purchases %}
+    <li>{{ purchase.service.name }} - {{ purchase.purchase_date }}</li>
+  {% empty %}
+    <li>No purchases yet.</li>
+  {% endfor %}
+</ul>
 
 {% comment %} 
 here will show-

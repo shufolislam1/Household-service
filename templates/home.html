@@ -8,7 +8,7 @@
             <h3>Name: {{ service.service_name }}</h3>
             <p>Borrowing Price: ${{ service.price }}</p>
             <p>Description: {{service.description}}</p>
-            <button type="button" class="btn btn-warning"><a href="" style="text-decoration: none;">Take Service</a></button> <br>
+            <button type="button" class="btn btn-warning"><a href="{% url 'take_service' service.id %}" style="text-decoration: none;">Take Service</a></button> <br>
             <button type="button" class="btn btn-warning my-2"><a href="{% url 'add_to_cart' service.id %}" style="text-decoration: none;">Add to Cart</a></button>
         </div>
     {% endfor %}

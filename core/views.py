@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import User, ServicePurchase
+from services.models import Services
 
 # Create your views here.
 def register(request):
@@ -50,8 +51,10 @@ def userLogout(request):
 
 @login_required
 def profile(request):
+    client = request.user
+    purchase = ServicePurchase.objects.filter(client=client)
     if request.user.is_admin:
-        user = request.user
+        # user = request.user
         users = User.objects.filter(is_admin=False)
         user_data = {
         'username': request.user.username,
@@ -66,7 +69,7 @@ def profile(request):
         'last_name': request.user.last_name,
         'email': request.user.email,
     }
-    return render(request, 'profile.html', {'user_data': user_data, 'user':user})
+    return render(request, 'profile.html', {'user_data': user_data, 'purchase': purchase})
 
 @login_required
 def edit_profile(request):
@@ -100,3 +103,12 @@ def promote_to_admin(request):
         messages.success(request, 'Promoted to admin Successfully')
     return redirect('profile')
 
+def take_service(request, service_id):
+    if request.method == 'POST':
+        # Assuming you have a form to take the service
+        # Process the form submission and create a ServicePurchase object
+        service = Services.objects.get(id=service_id)
+        client = request.user
+        ServicePurchase.objects.create(service=service, client=client)
+        messages.success(request, 'Service purchased successfully!')
+        return redirect('profile')

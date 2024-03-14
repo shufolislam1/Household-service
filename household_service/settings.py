@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'core',
     'cart',
     'services',
+    'Take_Service',
     
 ]
 THIRD_PARTY_APPS=[
