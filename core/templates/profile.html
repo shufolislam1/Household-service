@@ -44,9 +44,10 @@
 {% endif %}
 
 {% if request.user.is_client %}
+<h2>Purchase History:</h2>
 <ul>
   {% for purchase in purchases %}
-    <li>{{ purchase.service.name }} - {{ purchase.purchase_date }}</li>
+    <li>{{ purchase.service }} - {{ purchase.purchase_date }}</li>
   {% empty %}
     <li>No purchases yet.</li>
   {% endfor %}

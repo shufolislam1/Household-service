@@ -104,11 +104,15 @@ def promote_to_admin(request):
     return redirect('profile')
 
 def take_service(request, service_id):
-    if request.method == 'POST':
-        # Assuming you have a form to take the service
-        # Process the form submission and create a ServicePurchase object
+    if request.user.is_authenticated:
         service = Services.objects.get(id=service_id)
         client = request.user
         ServicePurchase.objects.create(service=service, client=client)
         messages.success(request, 'Service purchased successfully!')
-        return redirect('profile')
+        # return redirect('profile')
+        purchases = ServicePurchase.objects.filter(client=request.user)  # Filter by logged-in user
+        print(purchases)
+        return render(request, 'profile.html', {'purchases': purchases})
+    else:
+        messages.error(request, 'You need to be logged in to purchase a service.')
+        return redirect('userLogin')
