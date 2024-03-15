@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import dj_database_url
 import os
+
+env = environ.Env()
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +25,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*_srqi#9@q*mwc!48mnsc@_l3fspr-6fn5@7i5xlsx^6ov3h9b'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgres://household_service_tnma_user:Ga6Atb9fB2Dv129O2AaQsXeurqmPEbp7@dpg-cnpumgi1hbls738i2gq0-a.oregon-postgres.render.com/household_service_tnma',           
+    )
+}
+
+ALLOWED_HOSTS = ["*"]
+# CSRF_TRUSTED_ORIGINS = ['','https://*.127.0.0.1']
 
 
 # Application definition
@@ -42,7 +54,6 @@ INSTALLED_APPS = [
     'core',
     'cart',
     'services',
-    
 ]
 THIRD_PARTY_APPS=[
     'django_cleanup'
