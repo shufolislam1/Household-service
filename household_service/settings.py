@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'core',
     'cart',
     'services',
+    'sweetify',
 ]
 THIRD_PARTY_APPS=[
     'django_cleanup'

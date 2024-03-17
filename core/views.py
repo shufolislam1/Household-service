@@ -3,6 +3,7 @@ from . import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+import sweetify
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from .models import User, ServicePurchase
@@ -30,6 +31,7 @@ def userLogin(request):
             user = authenticate(username=user_name, password = user_pass)
             if user is not None and user.is_admin:
                 messages.success(request,'login successful as admin')
+                
                 login(request, user)
                 return redirect('home')
             elif user is not None and user.is_client:
