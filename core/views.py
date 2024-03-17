@@ -3,7 +3,6 @@ from . import forms
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-import sweetify
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from .models import User, ServicePurchase

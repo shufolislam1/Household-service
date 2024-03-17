@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from services.models import Services
 from .models import Cart, CartItems
 from django.contrib import messages
-import sweetify
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 # Create your views here.
