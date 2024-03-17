@@ -257,14 +257,23 @@
             <button type="button" class="btn btn-warning admin-error" data-message="This action is not available for admins">Take Service</button><br>
             <button type="button" class="btn btn-warning my-2 admin-error" data-message="This action is not available for admins">Add to Cart</button>
         {% else %}
-            <a href="{% url 'take_service' service.id %}" style="text-decoration: none;">Take Service</a>
-            <a href="{% url 'add_to_cart' service.id %}" style="text-decoration: none;">Add to Cart</a>
+        <button type="button" class="btn btn-warning">Take Service</button><br>
+        <button type="button" class="btn btn-warning my-2">Add to Cart</button>
         {% endif %}
               </p>
             </div>
           </div>
         </div>
         {% endfor %}
+        <script>
+          const adminErrorButtons = document.querySelectorAll('.admin-error');
+          
+          adminErrorButtons.forEach(button => {
+            button.addEventListener('click', () => {
+              alert(button.dataset.message); // Use a more suitable method like displaying a popup or inline message
+            });
+          });
+          </script>
       </div>
     </div>
   </section>
