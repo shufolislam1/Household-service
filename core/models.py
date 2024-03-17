@@ -6,7 +6,7 @@ from services.models import Services
 class User(AbstractUser):
     is_admin = models.BooleanField('Is admin', default = False)
     is_client = models.BooleanField('Is Client', default=False)
-    profile_picture = models.ImageField(upload_to='uploads/', default=1)
+    profile_picture = models.ImageField(upload_to='uploads/')
     
     
 class ServicePurchase(models.Model):
