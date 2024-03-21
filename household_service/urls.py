@@ -18,11 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import contact, service, about
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('', include('services.urls')),
     path('cart/', include('cart.urls')),
+    path('contact/', contact, name='contact'),
+    path('service/', service, name='service'),
+    path('about/', about, name='about'),
+    
 ]
 
 

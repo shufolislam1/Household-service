@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="service_section layout_padding">
+    <div class="container ">
+      <div class="heading_container heading_center">
+        <h2> Our Services </h2>
+      </div>
+      <div class="row ">
+        {% for service in services %}
+        <div class="col-sm-6 col-md-4 mx-auto ">
+          <div class="box rounded-4" style="height: 18rem;">
+            <div>
+              <img src="{{ service.image.url }}" alt="{{ service.name }}"> 
+            </div>
+            <div class="detail-box">
+              <h5>
+                <h3>Name: {{ service.service_name }}</h3>
+              </h5>
+              <p>
+            <p>Borrowing Price: ${{ service.price }}</p>
+            <p>Description: {{service.description}}</p>
+        {% if request.user.is_admin %}
+            <button type="button" class="btn btn-warning admin-error" data-message="This action is not available for admins">Take Service</button><br>
+            <button type="button" class="btn btn-warning my-2 admin-error" data-message="This action is not available for admins">Add to Cart</button>
+        {% else %}
+        <button type="button" class="btn btn-warning"><a href="{% url 'take_service' service.id %}" style="text-decoration: none;">Take Service</a></button><br>
+        <button type="button" class="btn btn-warning my-2"><a href="{% url 'add_to_cart' service.id %}" style="text-decoration: none;">Add to Cart</a></button>
+        {% endif %}
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <script>
+          const adminErrorButtons = document.querySelectorAll('.admin-error');
+          
+          adminErrorButtons.forEach(button => {
+            button.addEventListener('click', () => {
+              alert(button.dataset.message); // Use a more suitable method like displaying a popup or inline message
+            });
+          });
+          </script>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

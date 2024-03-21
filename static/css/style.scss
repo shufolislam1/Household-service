@@ -649,9 +649,9 @@ a:focus {
     height: 50px;
     margin-bottom: 25px;
     padding-left: 25px;
-    background-color: $white;
+    // background-color: $white;
     outline: none;
-    color: $white;
+    // color: $white;
     box-shadow: 0 0 7px 0 rgba($color: #000000, $alpha: .2);
 
     &::placeholder {
