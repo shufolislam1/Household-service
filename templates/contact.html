@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <!-- contact section -->
+    {% comment %} <!-- contact section -->
     <section class="contact_section layout_padding">
         <div class="container">
           <div class="heading_container">
@@ -44,5 +44,205 @@
       <!-- end contact section -->
       <!-- Google Map -->
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-      <!-- End Google Map -->
+      <!-- End Google Map --> {% endcomment %}
+
+
+      
+{% load static %}
+<style>
+  body {
+    font-family: Arial;
+  }
+  
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  /*  header style starts */
+  .site-banner {
+    min-height: 400px;
+    background-image: url({% static "images/header-image.jpg" %});
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+  }
+  
+  .site-banner a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px;
+  }
+  
+  .header-menu {
+    padding: 40px 20px;
+  }
+  
+  #header-right-menu {
+    float: right;
+  }
+  
+  .header-active {
+    background: rgba(0, 0, 0, 0.5);
+      border-radius: 25px;
+  }
+  
+  .heading {
+    color: #ffffff;
+    text-align: center;
+    font-family: cursive;
+    padding: 40px 0px;
+    font-size: 3em;
+    margin: 0px;
+  }
+  /*  header style ends */
+  
+  .footer {
+    display: flex;
+  }
+  
+  .footer-column {
+    width: 33.3%;
+    float: left;
+  }
+  
+  .map-image {
+    width: 100%;
+  }
+  
+  .contact-form-container {
+    background-color: #eaeaea;
+  }
+  
+  img {
+    vertical-align: middle;
+  }
+  
+  .tile-content {
+    padding: 20px 40px;
+  }
+  
+  .tile-content .contact-row {
+    margin-bottom: 20px;
+  }
+  
+  .tile-field {
+    margin-left: 20px;
+  }
+  
+  .form-field {
+    width: 100%;
+    padding: 10px 8px;
+      border-radius: 4px;
+      border: #d9d8d8 1px solid;
+  }
+  
+  .button {
+    color: #ffffff;
+    padding: 10px 30px 10px 30px;
+    border-radius: 20px;
+    background: linear-gradient(to right, #08a9df, #12054a);
+    border: 0px;
+  }
+  
+  #menu-icon {
+    display: none;
+    float: right;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .footer-column {
+      width: 50%;
+    }
+    .contact-form-container {
+      width: 100%;
+    }
+    .footer {
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 540px) {
+    #header-right-menu {
+      float: none;
+      display: none;
+    }
+    #header-right-menu a {
+      display: block;
+    }
+    .heading {
+      padding: 0px;
+    }
+    .tile-content {
+        padding: 0px 20px;
+    }
+  
+    .footer-column {
+      width: 100%;
+    }
+    
+    #menu-icon {
+      display: block;
+      float: right;
+    }
+  }
+</style>
+      <div class="container my-5">
+        <div class="site-banner">
+          <div class="header-menu">
+            <span id="menu-icon" onClick="toggleMenu()"><img src={% static "images/menu.svg" %} /></span>
+            <span id="header-right-menu"> 
+            </span>
+          </div>
+          <h1 class="heading">Contact Us</h1>
+        </div><div class="footer">
+          <div class="footer-column"><img class="map-image" src={% static "images/location.jpg" %} /></div>
+          <div class="footer-column">
+            <div class="tile-content">
+              <h1>Meet Us</h1>
+              <div class="contact-row">
+                <img src={% static "images/phone.svg" %}><span class="tile-field">+466723723666</span>
+              </div>
+              <div class="contact-row">
+                <img src={% static "images/at-sign.svg" %}><span class="tile-field">contact@admin.com</span>
+              </div>
+              <div class="contact-row">
+                <img src={% static "images/map-pin.svg" %}><span class="tile-field">1784 Griffin Street, Alabama</span>
+              </div>
+            </div>
+          </div>
+          <div class="footer-column contact-form-container">
+            <div class="tile-content">
+              <form method="POST">
+                <h1>Contact</h1>
+                <div class="contact-row">
+                  <input type="text" class="form-field" placeholder="Name">
+                </div>
+                <div class="contact-row">
+                  <input type="text" class="form-field" placeholder="Email">
+                </div>
+                <div class="contact-row">
+                  <input type="text" class="form-field" placeholder="Contact Number">
+                </div>
+                <div class="contact-row">
+                  <textarea rows="5" class="form-field" placeholder="Message"></textarea>
+                </div>
+                <button class="button">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <script>
+        function toggleMenu() {
+          var menuElement = document.getElementById("header-right-menu");
+          if (menuElement.style.display === "block") {
+            menuElement.style.display = "none";
+          } else {
+            menuElement.style.display = "block";
+          }
+        }
+      </script>
 {% endblock content %}
