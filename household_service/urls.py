@@ -18,14 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import contact, service, about
+from .views import contact, index, about
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('', include('services.urls')),
     path('cart/', include('cart.urls')),
     path('contact/', contact, name='contact'),
-    path('service/', service, name='service'),
+    path('', index, name='index'),
     path('about/', about, name='about'),
     
 ]

@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.all_service, name='all_service')
+    path('services/', views.all_service, name='all_service')
 ]
 
 
