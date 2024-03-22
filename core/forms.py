@@ -11,7 +11,7 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'is_admin', 'is_client']
-    
+        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
@@ -27,7 +27,6 @@ class RegistrationForm(UserCreationForm):
                     'focus:bg-white focus:border-gray-500'
                 ) 
             })
-            
             
 class ChangeUserForm(UserChangeForm):
     password = None
