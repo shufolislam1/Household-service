@@ -32,11 +32,11 @@ def userLogin(request):
                 messages.success(request,'login successful as admin')
                 
                 login(request, user)
-                return redirect('home')
+                return redirect('profile')
             elif user is not None and user.is_client:
                 messages.success(request,'login successful as client')
                 login(request, user)
-                return redirect('home')
+                return redirect('profile')
             else:
                 messages.warning(request, 'login info incorrect')
                 return redirect('register')
